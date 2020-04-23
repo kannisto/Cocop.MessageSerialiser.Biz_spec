@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProcessProductionSchedule releaseID="" xmlns="http://www.mesa.org/xml/B2MML-V0600" xmlns:p1="http://www.mesa.org/xml/B2MML-V0600-AllExtensions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mesa.org/xml/B2MML-V0600 B2MML-V0600-ProductionSchedule.xsd ">
+  
+  <!--
+    Please make sure to read and understand README.md and LICENSE.txt.
+
+    This file was prepared in the research project COCOP (Coordinating
+    Optimisation of Complex Industrial Processes).
+    https://cocop-spire.eu/
+    Author: Petri Kannisto, Tampere University, Finland
+    Last modified: 4/2020
+
+    This file has been derived the XML schemata of Business to Manufacturing 
+    Markup Language (B2MML). B2MML has the following license agreement:
+    
+    'This Manufacturing Enterprise Solutions Association (MESA International)
+    Work (including specifications, documents, software, and related items)
+    referred to as the Business To Manufacturing Markup Language (B2MML) is
+    provided by the copyright holders under the following license. Permission
+    to use, copy, modify, or redistribute this Work and its documentation, with
+    or without modification, for any purpose and without fee or royalty is
+    hereby granted provided MESA is acknowledged as the originator of this Work
+    using the following statement: "The Business To Manufacturing Markup
+    Language (B2MML) is used courtesy of the Manufacturing Enterprise Solutions
+    Association (MESA International)." In no event shall MESA, its members, or
+    any third party be liable for any costs, expenses, losses, damages or
+    injuries incurred by use of the Work or as a result of this agreement.'
+    
+    The B2MML XML schemata are available at http://www.mesa.org/en/B2MML.asp
+    
+    Please note: This file has *not* received any official compliance check
+    with B2MML. This file was *not* created by MESA International.
+  -->
+  
+  <ApplicationArea>
+    <CreationDateTime>2019-04-24T14:10:25Z</CreationDateTime> <!-- Required field -->
+  </ApplicationArea>
+  <DataArea>
+    <Process/>
+    <ProductionSchedule>
+      
+      <!-- Request 1. This encloses all data structures
+      to be supported within ProductionRequest. -->
+      <ProductionRequest>
+        
+        <!-- Identifier -->
+        <ID>my-identifier-1</ID>
+        
+        <!-- Hierarchy scope -->
+        <HierarchyScope>
+          <EquipmentID>fsf</EquipmentID>
+          <EquipmentElementLevel>ProcessCell</EquipmentElementLevel>
+        </HierarchyScope>
+        
+        <!-- Segment requirement 1 -->
+        <SegmentRequirement>
+          
+          <!-- Segment ID -->
+          <ProcessSegmentID>1</ProcessSegmentID>
+          
+          <!-- Start and end time -->
+          <EarliestStartTime>2019-04-24T15:00:00Z</EarliestStartTime>
+          <LatestEndTime>2019-04-24T15:30:00Z</LatestEndTime>
+          
+          <!-- Equipment requirement -->
+          <EquipmentRequirement>
+            <!-- Specifying both false and true to avoid tests
+            that accidentally default to a single correct value -->
+            <Quantity>
+              <QuantityString>false</QuantityString>
+              <DataType>boolean</DataType>
+              <!-- No unit of measure specified -->
+              <!-- No key specified -->
+            </Quantity>
+            <Quantity>
+              <QuantityString>true</QuantityString>
+              <DataType>boolean</DataType>
+              <!-- No unit of measure specified -->
+              <!-- No key specified -->
+            </Quantity>
+          </EquipmentRequirement>
+          
+          <!-- Material requirement 1 -->
+          <MaterialRequirement>
+            <MaterialDefinitionID>matte</MaterialDefinitionID>
+            <MaterialLotID>psc2-15</MaterialLotID>
+            <MaterialUse>Produced</MaterialUse>
+            <!-- Two quantities specified, identified with a key -->
+            <Quantity>
+              <QuantityString>41.9</QuantityString>
+              <DataType>double</DataType>
+              <UnitOfMeasure>t/h</UnitOfMeasure>
+              <Key>ProdRate</Key>
+            </Quantity>
+            <Quantity>
+              <QuantityString>11.9</QuantityString>
+              <DataType>double</DataType>
+              <UnitOfMeasure>t</UnitOfMeasure>
+              <Key>ProdAmount</Key>
+            </Quantity>
+            <!-- Nested "assembly" requirements -->
+            <AssemblyRequirement>
+              <MaterialDefinitionID>Cu</MaterialDefinitionID>
+            </AssemblyRequirement>
+            <AssemblyRequirement>
+              <MaterialDefinitionID>S</MaterialDefinitionID>
+            </AssemblyRequirement>
+          </MaterialRequirement>
+          <!-- Material requirement 2 -->
+          <MaterialRequirement>
+            <MaterialLotID>psc2-16</MaterialLotID>
+          </MaterialRequirement>
+          
+        </SegmentRequirement>
+        
+        <!-- Segment requirement 2 to test:
+        - multiple segments
+        - nested segment
+        -->
+        <SegmentRequirement>
+          <!-- Nested segment -->
+          <SegmentRequirement>
+            <EarliestStartTime>2019-04-24T15:31:00Z</EarliestStartTime>
+            <LatestEndTime>2019-04-24T16:00:00Z</LatestEndTime>
+          </SegmentRequirement>
+        </SegmentRequirement>
+        
+      </ProductionRequest>
+      
+      <!-- Request 2 to test if multiple requests work -->
+      <ProductionRequest>
+      
+        <ID>my-identifier-2</ID>
+      
+      </ProductionRequest>
+      
+    </ProductionSchedule>
+  </DataArea>
+</ProcessProductionSchedule>
